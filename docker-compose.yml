@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  mongo:
+    image: bitnami/mongodb:4.2
+    volumes:
+      - api_db_data:/data/db
+    environment:
+      - MONGODB_USERNAME=user
+      - MONGODB_PASSWORD=pass
+      - MONGODB_DATABASE=db
+    ports:
+      - 27017:27017
+volumes:
+  api_db_data:
