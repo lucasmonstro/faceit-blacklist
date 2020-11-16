@@ -39,4 +39,4 @@ testem.log
 Thumbs.db
 
 # Env files
-development.env
+.development.env
