@@ -17,14 +17,14 @@ Install yarn packages before continue
 yarn
 ```
 
-Ask another developer for the environment variables file(`development.env`)
+Ask another developer for the environment variables file(`.development.env`)
 
 # ⌨ Development
 
 ## ⚙ Running docker
 
 ```bash
-docker-compose --env-file development.env up
+docker-compose --env-file .development.env up
 ```
 
 After applying docker-compose, you can access url http://localhost:8081 to
