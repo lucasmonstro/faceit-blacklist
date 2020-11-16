@@ -1,11 +1,23 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import * as path from 'path';
+
+import mongodbConfig from './config/mongodb.config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ envFilePath: '.development.env' }),
-    MongooseModule.forRoot('mongodb://user:pass@127.0.0.1:27017/db'),
+    ConfigModule.forRoot({
+      envFilePath: path.join(process.cwd(), '.development.env'),
+      isGlobal: true,
+      load: [mongodbConfig],
+    }),
+    MongooseModule.forRootAsync({
+      useFactory: (configService: ConfigService) => ({
+        uri: configService.get('mongodb.uri'),
+      }),
+      inject: [ConfigService],
+    }),
   ],
 })
 export class AppModule {}
