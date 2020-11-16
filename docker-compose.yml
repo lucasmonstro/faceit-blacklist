@@ -4,12 +4,22 @@ services:
   mongo:
     image: bitnami/mongodb:4.2
     volumes:
-      - api_db_data:/data/db
+      - faceit_blacklist_data:/data/db
     environment:
-      - MONGODB_USERNAME=user
-      - MONGODB_PASSWORD=pass
-      - MONGODB_DATABASE=db
+      - MONGODB_USERNAME=${MONGODB_USERNAME}
+      - MONGODB_PASSWORD=${MONGODB_PASSWORD}
+      - MONGODB_DATABASE=${MONGODB_DATABASE}
     ports:
-      - 27017:27017
+      - ${MONGODB_PORT}:${MONGODB_PORT}
+  mongo-express:
+    image: mongo-express:0.54
+    environment:
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=false
+      - ME_CONFIG_MONGODB_AUTH_DATABASE=${MONGODB_DATABASE}
+      - ME_CONFIG_MONGODB_AUTH_USERNAME=${MONGODB_USERNAME}
+      - ME_CONFIG_MONGODB_AUTH_PASSWORD=${MONGODB_PASSWORD}
+      - ME_CONFIG_MONGODB_PORT=${MONGODB_PORT}
+    ports:
+      - 8081:8081
 volumes:
-  api_db_data:
+  faceit_blacklist_data:
