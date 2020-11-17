@@ -5,14 +5,12 @@ services:
     image: bitnami/mongodb:4.2
     volumes:
       - faceit_blacklist_data:/data/db
-    environment:
-      - MONGODB_USERNAME=${MONGODB_USERNAME}
-      - MONGODB_PASSWORD=${MONGODB_PASSWORD}
-      - MONGODB_DATABASE=${MONGODB_DATABASE}
-    ports:
-      - ${MONGODB_PORT}:${MONGODB_PORT}
+    env_file:
+      - .env.development
   mongo-express:
     image: mongo-express:0.54
+    env_file:
+      - .env.development
     environment:
       - ME_CONFIG_MONGODB_ENABLE_ADMIN=false
       - ME_CONFIG_MONGODB_PORT=${MONGODB_PORT}
