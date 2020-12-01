@@ -1,14 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import * as path from 'path';
 
 import mongodbConfig from './config/mongodb.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: path.join(process.cwd(), '.development.env'),
+      envFilePath: '.local.env',
       isGlobal: true,
       load: [mongodbConfig],
     }),
