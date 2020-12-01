@@ -17,7 +17,7 @@ Install yarn packages before continue
 yarn
 ```
 
-Ask developers abouy the environment variables file(`.local.env`)
+Ask developers about the environment variables file(`.local.env`)
 
 # ⌨ Development
 
