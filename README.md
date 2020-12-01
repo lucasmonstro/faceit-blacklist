@@ -21,7 +21,7 @@ Ask developers about the env file(`.local.env`)
 
 # ⌨ Development
 
-## ⚙ Running docker
+## Running docker
 
 ```bash
 docker-compose --env-file .local.env up
@@ -29,7 +29,7 @@ docker-compose --env-file .local.env up
 
 Access the mongodb UI in http://localhost:8081 to edit documents
 
-## ⚙ Running applications
+## Running applications
 
 ```bash
 # running web app
