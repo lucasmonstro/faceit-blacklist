@@ -17,14 +17,14 @@ Install yarn packages before continue
 yarn
 ```
 
-Ask developers about the env file(`.local.env`)
+Ask developers about the env file `.local.env`
 
 # ⌨ Development
 
 ## Running docker
 
 ```bash
-docker-compose --env-file .local.env up
+docker-compose --env-file .local.env up -d
 ```
 
 Access the mongodb UI in http://localhost:8081 to edit documents
