@@ -17,20 +17,19 @@ Install yarn packages before continue
 yarn
 ```
 
-Ask another developer for the environment variables file(`.development.env`)
+Ask developers about the env file `.local.env`
 
 # ⌨ Development
 
-## ⚙ Running docker
+## Running docker
 
 ```bash
-docker-compose --env-file .development.env up
+docker-compose --env-file .local.env up -d
 ```
 
-After applying docker-compose, you can access url http://localhost:8081 to
-access mongo-express which contains the UI for editing mongodb documents
+Access the mongodb UI in http://localhost:8081 to edit documents
 
-## ⚙ Running applications
+## Running applications
 
 ```bash
 # running web app
