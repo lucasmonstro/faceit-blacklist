@@ -4,12 +4,12 @@ import { ConfigService } from '@nestjs/config';
 import * as jwt from 'jsonwebtoken';
 import * as passport from 'passport';
 import { Strategy } from 'passport-faceit';
-import { FetchOrCreateBlacklist } from './fetch-or-create-blacklist.service';
+import { FetchOrCreateBlacklistService } from './fetch-or-create-blacklist.service';
 @Injectable()
 export class FaceitStrategy extends Strategy {
   constructor(
     private configService: ConfigService,
-    private fetchOrCreateBlacklistService: FetchOrCreateBlacklist
+    private fetchOrCreateBlacklistService: FetchOrCreateBlacklistService
   ) {
     super(
       {
