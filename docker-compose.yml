@@ -1,10 +1,9 @@
 version: '3.7'
-
 services:
   mongo:
     image: bitnami/mongodb:4.2
     volumes:
-      - faceit_blacklist_data:/data/db
+      - db:/data/db
     environment:
       - MONGODB_USERNAME=${MONGODB_USERNAME}
       - MONGODB_PASSWORD=${MONGODB_PASSWORD}
@@ -22,4 +21,4 @@ services:
     ports:
       - 8081:8081
 volumes:
-  faceit_blacklist_data:
+  db:
