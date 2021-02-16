@@ -39,6 +39,6 @@ export class FaceitStrategy extends Strategy {
     );
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    passport.use(this);
+    passport.use(this); // make old passport strategies work in nestjs ecosystem
   }
 }
