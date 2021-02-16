@@ -14,6 +14,6 @@ export class FetchOrCreateBlacklistService {
       return blacklist;
     }
     const blacklistToCreate = new this.blacklistModel({ faceitId });
-    return await blacklistToCreate.save();
+    return blacklistToCreate.save();
   }
 }
