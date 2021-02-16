@@ -4,6 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import * as jwt from 'jsonwebtoken';
 import * as passport from 'passport';
 import { Strategy } from 'passport-faceit';
+import { BlacklistDocument } from '../schemas/blacklist.schema';
 import { FetchOrCreateBlacklistService } from './fetch-or-create-blacklist.service';
 @Injectable()
 export class FaceitStrategy extends Strategy {
@@ -20,8 +21,8 @@ export class FaceitStrategy extends Strategy {
         _accessToken: string,
         _refreshToken: string,
         params: FaceitJWT,
-        _profile /* TODO: add type */,
-        done /* TODO: add type */
+        _profile: unknown,
+        done: (err: unknown, blacklist?: BlacklistDocument) => void
       ) => {
         try {
           const { guid: faceitId } = jwt.decode(
