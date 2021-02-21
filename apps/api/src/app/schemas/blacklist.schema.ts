@@ -6,7 +6,7 @@ export class Blacklist {
   @Prop({ unique: true, required: true })
   faceitId: string;
   @Prop([BlacklistedPlayer])
-  blacklistedPlayers: BlacklistedPlayer[];
+  blacklistedPlayers?: BlacklistedPlayer[];
 }
 export type BlacklistDocument = Blacklist & Document;
 export const BlacklistSchema = SchemaFactory.createForClass(Blacklist);
