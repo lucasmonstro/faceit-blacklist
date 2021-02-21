@@ -13,7 +13,6 @@ export class FetchOrCreateBlacklistService {
     if (blacklist) {
       return blacklist;
     }
-    const blacklistToCreate = new this.blacklistModel({ faceitId });
-    return blacklistToCreate.save();
+    return this.blacklistModel.create({ faceitId });
   }
 }
