@@ -4,8 +4,13 @@ import { Prop, Schema } from '@nestjs/mongoose';
 export class BlacklistedPlayer {
   @Prop({ index: true, required: true })
   faceitId: string;
-  @Prop({ type: String, enum: Object.values(Reason), required: true })
-  reason: Reason;
+  @Prop({
+    type: [String],
+    enum: Object.values(Reason),
+    required: true,
+    unique: true,
+  })
+  reason: Reason[];
   @Prop()
   note?: string;
 }
