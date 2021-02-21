@@ -4,8 +4,8 @@ import { PassportModule } from '@nestjs/passport';
 import * as passport from 'passport';
 import { Blacklist, BlacklistSchema } from '../schemas/blacklist.schema';
 import { FaceitStrategy } from './faceit.strategy';
-import { FetchOrCreateBlacklistService } from './fetch-or-create-blacklist.service';
 import { JwtStrategy } from './jwt.strategy';
+import { SignupService } from './signup.service';
 @Module({
   imports: [
     MongooseModule.forFeature([
@@ -13,7 +13,7 @@ import { JwtStrategy } from './jwt.strategy';
     ]),
     PassportModule,
   ],
-  providers: [FetchOrCreateBlacklistService, FaceitStrategy, JwtStrategy],
+  providers: [FaceitStrategy, JwtStrategy, SignupService],
 })
 export class AuthModule {
   configure(consumer: MiddlewareConsumer) {
