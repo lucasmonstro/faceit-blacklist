@@ -5,7 +5,7 @@ import * as passport from 'passport';
 import { Blacklist, BlacklistSchema } from '../schemas/blacklist.schema';
 import { FaceitStrategy } from './faceit.strategy';
 import { JwtStrategy } from './jwt.strategy';
-import { SignUpService } from './signUp.service';
+import { SignUpService } from './sign-up.service';
 @Module({
   imports: [
     MongooseModule.forFeature([

@@ -5,7 +5,7 @@ import * as jwt from 'jsonwebtoken';
 import * as passport from 'passport';
 import { Strategy } from 'passport-faceit';
 import { BlacklistDocument } from '../schemas/blacklist.schema';
-import { SignUpService } from './signUp.service';
+import { SignUpService } from './sign-up.service';
 @Injectable()
 export class FaceitStrategy extends Strategy {
   constructor(

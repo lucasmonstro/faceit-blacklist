@@ -3,7 +3,7 @@ import { Test } from '@nestjs/testing'
 import { Model } from 'mongoose';
 import { Blacklist, BlacklistDocument } from '../schemas/blacklist.schema';
 import { blacklistMock } from '../schemas/__mocks__/blacklist.schema';
-import { SignUpService } from './signUp.service';
+import { SignUpService } from './sign-up.service';
 describe('SignUpService', () => {
   let service: SignUpService;
   let model: Model<BlacklistDocument>;
