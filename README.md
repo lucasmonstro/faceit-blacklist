@@ -24,7 +24,7 @@ Ask developers about the env file `.local.env`
 ## Running docker
 
 ```bash
-docker-compose --env-file .local.env up -d
+docker-compose --env-file .local.env up
 ```
 
 Access the mongodb UI in http://localhost:8081 to edit documents
