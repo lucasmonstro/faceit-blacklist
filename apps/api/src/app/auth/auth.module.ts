@@ -2,15 +2,13 @@ import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PassportModule } from '@nestjs/passport';
 import * as passport from 'passport';
-import { Blacklist, BlacklistSchema } from '../schemas/blacklist.schema';
+import { User, UserSchema } from '../schemas/user.schema';
 import { FaceitStrategy } from './faceit.strategy';
 import { JwtStrategy } from './jwt.strategy';
 import { SignUpService } from './sign-up.service';
 @Module({
   imports: [
-    MongooseModule.forFeature([
-      { name: Blacklist.name, schema: BlacklistSchema },
-    ]),
+    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     PassportModule,
   ],
   providers: [FaceitStrategy, JwtStrategy, SignUpService],
