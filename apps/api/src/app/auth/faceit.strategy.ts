@@ -5,12 +5,12 @@ import * as jwt from 'jsonwebtoken';
 import * as passport from 'passport';
 import { Strategy } from 'passport-faceit';
 import { BlacklistDocument } from '../schemas/blacklist.schema';
-import { SignupService } from './signup.service';
+import { SignUpService } from './signUp.service';
 @Injectable()
 export class FaceitStrategy extends Strategy {
   constructor(
     private configService: ConfigService,
-    private signupService: SignupService
+    private signUpService: SignUpService
   ) {
     super(
       {
@@ -28,7 +28,7 @@ export class FaceitStrategy extends Strategy {
           const { guid: faceitId } = jwt.decode(
             params.id_token
           ) as FaceitIDToken;
-          const blacklist = await this.signupService.signup(faceitId);
+          const blacklist = await this.signUpService.signUp(faceitId);
           done(null, blacklist);
         } catch (err) {
           done(err);

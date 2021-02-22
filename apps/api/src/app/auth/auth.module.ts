@@ -5,7 +5,7 @@ import * as passport from 'passport';
 import { Blacklist, BlacklistSchema } from '../schemas/blacklist.schema';
 import { FaceitStrategy } from './faceit.strategy';
 import { JwtStrategy } from './jwt.strategy';
-import { SignupService } from './signup.service';
+import { SignUpService } from './signUp.service';
 @Module({
   imports: [
     MongooseModule.forFeature([
@@ -13,7 +13,7 @@ import { SignupService } from './signup.service';
     ]),
     PassportModule,
   ],
-  providers: [FaceitStrategy, JwtStrategy, SignupService],
+  providers: [FaceitStrategy, JwtStrategy, SignUpService],
 })
 export class AuthModule {
   configure(consumer: MiddlewareConsumer) {
