@@ -24,12 +24,12 @@ describe('FaceitStrategy', () => {
       throw 'Custom error';
     })
     await strategy.callback(faceitJWT, doneSpy);
+    expect(jsonwebtoken.decode).toHaveBeenCalledWith(faceitJWT.id_token);
     expect(doneSpy).toHaveBeenCalledWith('Custom error');
   });
   it('should call done within correct user', async () => {
     const doneSpy = jest.fn();
     await strategy.callback(faceitJWT, doneSpy);
-    expect(jsonwebtoken.decode).toHaveBeenCalledWith(faceitJWT.id_token);
     expect(service.signUp).toHaveBeenCalledWith(faceitIDToken.guid);
     expect(doneSpy).toHaveBeenCalledWith(null, userMock);
   });
