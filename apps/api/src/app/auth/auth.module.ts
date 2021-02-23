@@ -4,8 +4,8 @@ import { PassportModule } from '@nestjs/passport';
 import * as passport from 'passport';
 import { User, UserSchema } from '../schemas/user.schema';
 import { FaceitStrategy } from './faceit.strategy';
-import { JwtStrategy } from './jwt.strategy';
 import { SignUpService } from './services/sign-up/sign-up.service';
+import { JwtStrategy } from './strategies/jwt/jwt.strategy';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
