@@ -4,8 +4,8 @@ import { ConfigService } from '@nestjs/config';
 import * as jwt from 'jsonwebtoken';
 import * as passport from 'passport';
 import { Strategy } from 'passport-faceit';
-import { UserDoc } from '../schemas/user.schema';
-import { SignUpService } from './sign-up.service';
+import { UserDoc } from '../../../schemas/user.schema';
+import { SignUpService } from '../../services/sign-up/sign-up.service';
 @Injectable()
 export class FaceitStrategy extends Strategy {
   constructor(
@@ -23,20 +23,19 @@ export class FaceitStrategy extends Strategy {
         params: FaceitJWT,
         _profile: unknown,
         done: (err: unknown, user?: UserDoc) => void
-      ) => {
-        try {
-          const { guid: faceitId } = jwt.decode(
-            params.id_token
-          ) as FaceitIDToken;
-          const user = await this.signUpService.signUp(faceitId);
-          done(null, user);
-        } catch (err) {
-          done(err);
-        }
-      }
+      ) => this.callback(params, done)
     );
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     passport.use(this); // make old passport strategies work in nestjs ecosystem
+  }
+  async callback(params: FaceitJWT, done: (err: unknown, user?: UserDoc) => void) {
+    try {
+      const { guid: faceitId } = jwt.decode(params.id_token) as FaceitIDToken;
+      const user = await this.signUpService.signUp(faceitId);
+      done(null, user);
+    } catch (err) {
+      done(err);
+    }
   }
 }

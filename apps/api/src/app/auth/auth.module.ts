@@ -3,8 +3,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { PassportModule } from '@nestjs/passport';
 import * as passport from 'passport';
 import { User, UserSchema } from '../schemas/user.schema';
-import { FaceitStrategy } from './faceit.strategy';
 import { SignUpService } from './services/sign-up/sign-up.service';
+import { FaceitStrategy } from './strategies/faceit/faceit.strategy';
 import { JwtStrategy } from './strategies/jwt/jwt.strategy';
 @Module({
   imports: [
