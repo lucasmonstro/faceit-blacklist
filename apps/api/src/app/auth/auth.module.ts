@@ -5,7 +5,7 @@ import * as passport from 'passport';
 import { User, UserSchema } from '../schemas/user.schema';
 import { FaceitStrategy } from './faceit.strategy';
 import { JwtStrategy } from './jwt.strategy';
-import { SignUpService } from './sign-up.service';
+import { SignUpService } from './services/sign-up/sign-up.service';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
