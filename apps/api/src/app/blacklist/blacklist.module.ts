@@ -7,9 +7,7 @@ import { IsFaceitIdValidator } from './validators/is-faceit-id.validator';
 @Module({
   imports: [
     HttpModule,
-    MongooseModule.forFeature([
-      { name: User.name, schema: UserSchema },
-    ]),
+    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
   ],
   providers: [
     AddPlayerToBlacklistService,
