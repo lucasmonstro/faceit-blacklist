@@ -1,4 +1,5 @@
 import { Reason } from '@faceit-blacklist/interfaces';
+import { registerEnumType } from '@nestjs/graphql';
 import { Prop, Schema } from '@nestjs/mongoose';
 @Schema({ _id: false })
 export class BlacklistedPlayer {
@@ -9,3 +10,4 @@ export class BlacklistedPlayer {
   @Prop()
   note?: string;
 }
+registerEnumType(Reason, { name: 'Reason' });
