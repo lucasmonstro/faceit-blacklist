@@ -1,11 +1,12 @@
+import { FaceitIDToken } from '@faceit-blacklist/interfaces';
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 export const CurrentUser = createParamDecorator((
-  data /* TODO: add parameter type */,
+  prop: keyof FaceitIDToken,
   context: ExecutionContext
-) /* TODO: add return type */ => {
+) => {
   const ctx = GqlExecutionContext.create(context);
   const user = ctx.getContext().req.user;
-  const userOrAttribute = data ? user[data] : user;
+  const userOrAttribute = prop ? user[prop] : user;
   return userOrAttribute;
 });
