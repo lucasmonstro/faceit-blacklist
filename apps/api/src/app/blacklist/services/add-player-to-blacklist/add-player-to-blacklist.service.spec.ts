@@ -38,8 +38,8 @@ describe('AddPlayerToBlacklistService', () => {
         faceitId: ownerFaceitId,
         'blacklistedPlayers.faceitId': { $ne: input.faceitId },
       },
-      { $push: { blacklistedPlayers: input } }
+      { $push: { blacklistedPlayers: input } },
+      { new: true },
     );
-    expect(userRepositoryMock.findOne).toHaveBeenCalledWith({ faceitId: ownerFaceitId });
   });
 });
