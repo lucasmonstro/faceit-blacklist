@@ -13,18 +13,18 @@ export class AddPlayerToBlacklistService {
   async add(
     ownerFaceitId: string,
     input: AddPlayerToBlacklistInput
-  ): Promise<true> {
+  ): Promise<User> {
     const isAddingOwner = ownerFaceitId === input.faceitId;
     if (isAddingOwner) {
       throw new CannotAddOwnerToYourOwnBlacklistException();
     }
-    await this.userModel.updateOne(
+    await this.userModel.findOneAndUpdate(
       {
         faceitId: ownerFaceitId,
         'blacklistedPlayers.faceitId': { $ne: input.faceitId },
       },
       { $push: { blacklistedPlayers: input } },
     );
-    return true;
+    return this.userModel.findOne({ faceitId: ownerFaceitId });
   }
 }
