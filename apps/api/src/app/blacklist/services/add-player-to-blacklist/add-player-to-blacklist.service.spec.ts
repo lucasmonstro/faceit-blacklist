@@ -1,10 +1,10 @@
-import { Reason } from '@faceit-blacklist/interfaces';
 import { getModelToken } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as faker from 'faker';
 import { User } from '../../../schemas/user.schema';
-import { userRepositoryMock } from '../../../schemas/__mocks__/user.schema';
+import { userMock, userRepositoryMock } from '../../../schemas/__mocks__/user.schema';
 import { CannotAddOwnerToYourOwnBlacklistException } from '../../exceptions/cannot-add-owner-to-your-own-blacklist.exception';
+import { createAddPlayerToBlacklistInput } from '../../inputs/__mocks__/add-player-to-blacklist.input';
 import { AddPlayerToBlacklistService } from '../../services/add-player-to-blacklist/add-player-to-blacklist.service';
 describe('AddPlayerToBlacklistService', () => {
   let service: AddPlayerToBlacklistService;
@@ -24,33 +24,22 @@ describe('AddPlayerToBlacklistService', () => {
   });
   it('should throw CannotAddOwnerToYourOwnBlacklistException when adding owner to your own blacklist', async () => {
     const ownerFaceitId = faker.random.uuid();
-    const addPlayerToBlacklistInput = {
-      faceitId: ownerFaceitId,
-      reason: [faker.random.arrayElement(Object.values(Reason))],
-      note: faker.lorem.sentence(),
-    };
+    const input = createAddPlayerToBlacklistInput({ faceitId: ownerFaceitId });
     await expect(
-      service.add(ownerFaceitId, addPlayerToBlacklistInput)
+      service.add(ownerFaceitId, input)
     ).rejects.toThrow(CannotAddOwnerToYourOwnBlacklistException);
   });
   it('should add player to blacklist', async () => {
     const ownerFaceitId = faker.random.uuid();
-    const addPlayerToBlacklistInput = {
-      faceitId: faker.random.uuid(),
-      reason: [faker.random.arrayElement(Object.values(Reason))],
-      note: faker.lorem.sentence(),
-    };
-    expect(
-      await service.add(ownerFaceitId, addPlayerToBlacklistInput)
-    ).toBe(true);
-    expect(userRepositoryMock.updateOne).toHaveBeenCalledWith(
+    const input = createAddPlayerToBlacklistInput();
+    expect(await service.add(ownerFaceitId, input)).toBe(userMock);
+    expect(userRepositoryMock.findOneAndUpdate).toHaveBeenCalledWith(
       {
         faceitId: ownerFaceitId,
-        'blacklistedPlayers.faceitId': {
-          $ne: addPlayerToBlacklistInput.faceitId,
-        },
+        'blacklistedPlayers.faceitId': { $ne: input.faceitId },
       },
-      { $push: { blacklistedPlayers: addPlayerToBlacklistInput } }
+      { $push: { blacklistedPlayers: input } }
     );
+    expect(userRepositoryMock.findOne).toHaveBeenCalledWith({ faceitId: ownerFaceitId });
   });
 });
