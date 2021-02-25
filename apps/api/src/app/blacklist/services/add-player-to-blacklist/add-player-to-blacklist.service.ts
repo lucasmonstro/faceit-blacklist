@@ -18,13 +18,13 @@ export class AddPlayerToBlacklistService {
     if (isAddingOwner) {
       throw new CannotAddOwnerToYourOwnBlacklistException();
     }
-    await this.userModel.findOneAndUpdate(
+    return this.userModel.findOneAndUpdate(
       {
         faceitId: ownerFaceitId,
         'blacklistedPlayers.faceitId': { $ne: input.faceitId },
       },
       { $push: { blacklistedPlayers: input } },
+      { new: true },
     );
-    return this.userModel.findOne({ faceitId: ownerFaceitId });
   }
 }
