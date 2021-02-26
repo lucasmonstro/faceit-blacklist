@@ -34,12 +34,8 @@ describe('AddPlayerToBlacklistService', () => {
     const input = createAddPlayerToBlacklistInput();
     expect(await service.add(ownerFaceitId, input)).toBe(userMock);
     expect(userRepositoryMock.findOneAndUpdate).toHaveBeenCalledWith(
-      {
-        faceitId: ownerFaceitId,
-        'blacklistedPlayers.faceitId': { $ne: input.faceitId },
-      },
-      { $push: { blacklistedPlayers: input } },
-      { new: true },
+      { faceitId: ownerFaceitId },
+      { $addToSet: { blacklistedPlayers: input } },
     );
   });
 });
