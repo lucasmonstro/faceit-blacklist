@@ -1,4 +1,4 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { User } from '../../../schemas/user.schema';
 import { CurrentUser } from '../../decorators/current-user.decorator';
 import { AddPlayerToBlacklistInput } from '../../inputs/add-player-to-blacklist.input';
@@ -14,10 +14,5 @@ export class AddPlayerToBlacklistResolver {
     @Args('input') input: AddPlayerToBlacklistInput
   ): Promise<User> {
     return this.addPlayerToBlacklistService.add(ownerFaceitId, input);
-  }
-  // TODO: remove when any query was added since graphql always require a root query
-  @Query(() => Boolean)
-  async helloWorld(): Promise<boolean> {
-    return true;
   }
 }
