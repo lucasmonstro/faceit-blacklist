@@ -12,7 +12,7 @@ export class RemovePlayerFromBlacklistResolver {
     @CurrentUser('guid') ownerFaceitId: string,
     @Args('faceitId', { type: () => ID }) faceitIdToRemove: string
   ): Promise<User> {
-    return await this.removePlayerFromBlacklistService.remove(
+    return this.removePlayerFromBlacklistService.remove(
       ownerFaceitId,
       faceitIdToRemove
     );
