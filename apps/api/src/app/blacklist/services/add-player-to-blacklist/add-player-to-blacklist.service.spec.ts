@@ -39,7 +39,6 @@ describe('AddPlayerToBlacklistService', () => {
         'blacklistedPlayers.faceitId': { $ne: input.faceitId },
       },
       { $push: { blacklistedPlayers: input } },
-      { new: true },
     );
   });
 });

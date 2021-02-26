@@ -27,7 +27,6 @@ describe('RemovePlayerFromBlacklistService', () => {
     expect(userRepositoryMock.findOneAndUpdate).toHaveBeenCalledWith(
       { faceitId: ownerFaceitId },
       { $pull: { blacklistedPlayers: { faceitId: faceitIdToRemove } } },
-      { new: true }
     );
   });
 });

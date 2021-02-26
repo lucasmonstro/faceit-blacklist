@@ -15,7 +15,6 @@ export class RemovePlayerFromBlacklistService {
     return this.userModel.findOneAndUpdate(
       { faceitId: ownerFaceitId },
       { $pull: { blacklistedPlayers: { faceitId: faceitIdToRemove } } },
-      { new: true }
     );
   }
 }
