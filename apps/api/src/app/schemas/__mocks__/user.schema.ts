@@ -4,4 +4,5 @@ export const userMock = { faceitId: faker.random.uuid(), blacklistedPlayers: [] 
 export const userRepositoryMock = {
   findOne: jest.fn(() => userMock),
   findOneAndUpdate: jest.fn(() => userMock),
+  updateOne: jest.fn(() => ({ nModified: 0 })),
 };

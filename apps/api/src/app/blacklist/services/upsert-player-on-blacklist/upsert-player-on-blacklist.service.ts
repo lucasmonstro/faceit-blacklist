@@ -10,11 +10,11 @@ export class UpsertPlayerOnBlacklistService {
     faceitId: string,
     input: BlacklistedPlayerInput
   ): Promise<User> {
-    const { nModified } = await this.userModel.updateOne(
+    const { nModified: modifiedDocs } = await this.userModel.updateOne(
       { faceitId, 'blacklistedPlayers.faceitId': input.faceitId },
       { $set: { 'blacklistedPlayers.$': input } },
     );
-    const shouldInsert = nModified === 0;
+    const shouldInsert = modifiedDocs === 0;
     if(shouldInsert) {
       await this.userModel.updateOne(
         { faceitId },
