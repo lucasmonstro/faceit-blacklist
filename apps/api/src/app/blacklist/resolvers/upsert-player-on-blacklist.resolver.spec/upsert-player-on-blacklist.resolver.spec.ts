@@ -18,7 +18,7 @@ describe('UpsertPlayerOnBlacklistResolver', () => {
       UpsertPlayerOnBlacklistService
     );
   });
-  it('should add player to blacklist', async () => {
+  it('should upsert player on blacklist', async () => {
     const ownerFaceitId = faker.random.uuid();
     const input = createBlacklistedPlayerInput();
     expect(await resolver.upsertPlayerOnBlacklist(ownerFaceitId, input)).toBe(true);
