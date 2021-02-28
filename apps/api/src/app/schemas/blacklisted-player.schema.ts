@@ -10,7 +10,7 @@ export class BlacklistedPlayer {
   @Field(() => [Reason])
   @Prop({ type: [String], enum: Object.values(Reason), required: true })
   reason: Reason[];
-  @Field()
+  @Field({ nullable: true })
   @Prop()
   note?: string;
 }
