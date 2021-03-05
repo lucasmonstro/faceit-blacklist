@@ -1,5 +1,5 @@
 import { getModelToken } from '@nestjs/mongoose';
-import { Test } from '@nestjs/testing'
+import { Test } from '@nestjs/testing';
 import { Model } from 'mongoose';
 import { User, UserDoc } from '../../../schemas/user.schema';
 import { userMock } from '../../../schemas/__mocks__/user.schema';
@@ -14,7 +14,7 @@ describe('SignUpService', () => {
         {
           provide: getModelToken(User.name),
           useValue: { create: jest.fn(), findOne: jest.fn() },
-        }
+        },
       ],
     }).compile();
     service = module.get<SignUpService>(SignUpService);

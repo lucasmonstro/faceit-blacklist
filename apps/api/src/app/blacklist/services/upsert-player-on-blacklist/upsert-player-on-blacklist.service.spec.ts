@@ -2,7 +2,10 @@ import { getModelToken } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as faker from 'faker';
 import { User } from '../../../schemas/user.schema';
-import { userMock, userRepositoryMock } from '../../../schemas/__mocks__/user.schema';
+import {
+  userMock,
+  userRepositoryMock,
+} from '../../../schemas/__mocks__/user.schema';
 import { createBlacklistedPlayerInput } from '../../inputs/__mocks__/blacklisted-player.input';
 import { UpsertPlayerOnBlacklistService } from './upsert-player-on-blacklist.service';
 describe('UpsertPlayerOnBlacklistService', () => {
@@ -29,25 +32,26 @@ describe('UpsertPlayerOnBlacklistService', () => {
     expect(userRepositoryMock.updateOne).toHaveBeenNthCalledWith(
       1,
       { faceitId, 'blacklistedPlayers.faceitId': input.faceitId },
-      { $set: { 'blacklistedPlayers.$': input } },
+      { $set: { 'blacklistedPlayers.$': input } }
     );
     expect(userRepositoryMock.updateOne).toHaveBeenNthCalledWith(
       2,
       { faceitId },
-      { $addToSet: { blacklistedPlayers: input } },
+      { $addToSet: { blacklistedPlayers: input } }
     );
   });
   it('should update player on blacklist', async () => {
     const faceitId = faker.random.uuid();
     const input = createBlacklistedPlayerInput();
-    jest.spyOn(userRepositoryMock, 'updateOne')
-      .mockImplementationOnce(() => ({ nModified: 1}));
+    jest
+      .spyOn(userRepositoryMock, 'updateOne')
+      .mockImplementationOnce(() => ({ nModified: 1 }));
     expect(await service.upsert(faceitId, input)).toBe(userMock);
     expect(userRepositoryMock.updateOne).toHaveBeenCalledTimes(1);
     expect(userRepositoryMock.updateOne).toHaveBeenNthCalledWith(
       1,
       { faceitId, 'blacklistedPlayers.faceitId': input.faceitId },
-      { $set: { 'blacklistedPlayers.$': input } },
+      { $set: { 'blacklistedPlayers.$': input } }
     );
   });
 });

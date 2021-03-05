@@ -1,5 +1,5 @@
 import { ConfigModule } from '@nestjs/config';
-import { Test } from '@nestjs/testing'
+import { Test } from '@nestjs/testing';
 import * as jsonwebtoken from 'jsonwebtoken';
 import { userMock } from '../../../schemas/__mocks__/user.schema';
 import { faceitIDToken, faceitJWT } from '../../__mocks__/faceit';
@@ -22,7 +22,7 @@ describe('FaceitStrategy', () => {
     const doneSpy = jest.fn();
     jest.spyOn(service, 'signUp').mockImplementationOnce(() => {
       throw 'Custom error';
-    })
+    });
     await strategy.callback(faceitJWT, doneSpy);
     expect(jsonwebtoken.decode).toHaveBeenCalledWith(faceitJWT.id_token);
     expect(doneSpy).toHaveBeenCalledWith('Custom error');

@@ -1,6 +1,12 @@
 import { Reason } from '@faceit-blacklist/interfaces';
 import { Field, InputType } from '@nestjs/graphql';
-import { ArrayUnique, IsEnum, IsNotEmpty, IsOptional, Length } from 'class-validator';
+import {
+  ArrayUnique,
+  IsEnum,
+  IsNotEmpty,
+  IsOptional,
+  Length,
+} from 'class-validator';
 import { IsFaceitId } from '../validators/is-faceit-id.validator';
 @InputType()
 export class BlacklistedPlayerInput {

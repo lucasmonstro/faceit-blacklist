@@ -3,7 +3,9 @@ import * as faker from 'faker';
 import { userMock } from '../../../schemas/__mocks__/user.schema';
 import { RemovePlayerFromBlacklistService } from '../../services/remove-player-from-blacklist/remove-player-from-blacklist.service';
 import { RemovePlayerFromBlacklistResolver } from './remove-player-from-blacklist.resolver';
-jest.mock('../../services/remove-player-from-blacklist/remove-player-from-blacklist.service');
+jest.mock(
+  '../../services/remove-player-from-blacklist/remove-player-from-blacklist.service'
+);
 describe('RemovePlayerFromBlacklistResolver', () => {
   let resolver: RemovePlayerFromBlacklistResolver;
   let service: RemovePlayerFromBlacklistService;

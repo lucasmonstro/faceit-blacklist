@@ -5,13 +5,10 @@ import { User, UserDoc } from '../../../schemas/user.schema';
 @Injectable()
 export class RemovePlayerFromBlacklistService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDoc>) {}
-  async remove(
-    ownerFaceitId: string,
-    faceitIdToRemove: string
-  ): Promise<User> {
+  async remove(ownerFaceitId: string, faceitIdToRemove: string): Promise<User> {
     return this.userModel.findOneAndUpdate(
       { faceitId: ownerFaceitId },
-      { $pull: { blacklistedPlayers: { faceitId: faceitIdToRemove } } },
+      { $pull: { blacklistedPlayers: { faceitId: faceitIdToRemove } } }
     );
   }
 }
