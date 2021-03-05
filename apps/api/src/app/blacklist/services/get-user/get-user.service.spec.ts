@@ -2,7 +2,10 @@ import { getModelToken } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as faker from 'faker';
 import { User } from '../../../schemas/user.schema';
-import { userMock, userRepositoryMock } from '../../../schemas/__mocks__/user.schema';
+import {
+  userMock,
+  userRepositoryMock,
+} from '../../../schemas/__mocks__/user.schema';
 import { GetUserService } from './get-user.service';
 describe('GetUserService', () => {
   let service: GetUserService;

@@ -17,10 +17,7 @@ import { JwtStrategy } from './strategies/jwt/jwt.strategy';
     FaceitStrategy,
     JwtStrategy,
     SignUpService,
-    {
-      provide: APP_GUARD,
-      useClass: GqlAuthGuard,
-    },
+    { provide: APP_GUARD, useClass: GqlAuthGuard },
   ],
 })
 export class AuthModule {

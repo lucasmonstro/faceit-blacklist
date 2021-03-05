@@ -29,7 +29,10 @@ export class FaceitStrategy extends Strategy {
     // @ts-ignore
     passport.use(this); // make old passport strategies work in nestjs ecosystem
   }
-  async callback(params: FaceitJWT, done: (err: unknown, user?: UserDoc) => void) {
+  async callback(
+    params: FaceitJWT,
+    done: (err: unknown, user?: UserDoc) => void
+  ) {
     try {
       const { guid: faceitId } = jwt.decode(params.id_token) as FaceitIDToken;
       const user = await this.signUpService.signUp(faceitId);

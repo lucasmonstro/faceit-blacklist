@@ -6,9 +6,7 @@ import { GetUserService } from '../../services/get-user/get-user.service';
 export class GetCurrentUserResolver {
   constructor(private getUserService: GetUserService) {}
   @Query(() => User)
-  async getCurrentUser(
-    @CurrentUser('guid') ownerFaceitId: string
-  ): Promise<User> {
-    return this.getUserService.get(ownerFaceitId);
+  async getCurrentUser(@CurrentUser('guid') faceitId: string): Promise<User> {
+    return this.getUserService.get(faceitId);
   }
 }
