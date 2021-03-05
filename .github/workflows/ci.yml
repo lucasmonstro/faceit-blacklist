@@ -24,7 +24,11 @@ jobs:
       - name: Build Api
         run: ./node_modules/.bin/nx build app
   test:
+    environment: test
     runs-on: ubuntu-latest
+    env:
+      FACEIT_APP_CLIENT_ID: ${{ secrets.FACEIT_APP_CLIENT_ID }}
+      FACEIT_APP_CLIENT_SECRET: ${{ secrets.FACEIT_APP_CLIENT_SECRET }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
