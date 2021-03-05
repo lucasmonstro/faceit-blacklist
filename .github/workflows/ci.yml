@@ -1,0 +1,52 @@
+name: Countinuous Integration
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.8.0
+      - name: Fetch dependencies from cache
+        id: yarn-cache
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Install dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn --frozen-lockfile
+      - name: Build App
+        run: ./node_modules/.bin/nx build api
+      - name: Build Api
+        run: ./node_modules/.bin/nx build app
+  test:
+    runs-on: ubuntu-latest
+    env:
+      FACEIT_APP_CLIENT_ID: ${{ secrets.FACEIT_APP_CLIENT_ID }}
+      FACEIT_APP_CLIENT_SECRET: ${{ secrets.FACEIT_APP_CLIENT_SECRET }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.8.0
+      - name: Fetch dependencies from cache
+        id: yarn-cache
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Install dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn --frozen-lockfile
+      - name: Lint files
+        run: ./node_modules/.bin/nx lint
+      - name: Unit tests App
+        run: ./node_modules/.bin/nx test app
+      - name: Unit tests Api
+        run: ./node_modules/.bin/nx test api
